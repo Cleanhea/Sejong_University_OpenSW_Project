@@ -27,7 +27,7 @@ public class PlayerDash : MonoBehaviour
             playerStat.dashCooldownTimer -= Time.deltaTime;
             if (playerStat.dashCooldownTimer <= 0)
             {
-                playerStat.currentDashCount = playerStat.maxDashCount;
+                playerStat.currentDashCount += 1;;
                 playerStat.dashCooldownTimer = playerStat.dashCooldown; // 쿨타임 초기화
             }
         }

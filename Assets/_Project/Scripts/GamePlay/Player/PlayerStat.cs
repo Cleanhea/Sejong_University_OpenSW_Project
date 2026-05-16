@@ -11,7 +11,7 @@ public class PlayerStat : MonoBehaviour
     public int currentDashCount = 3;// 현재 대시 횟수
     public float dashCooldown = 2f;// 대시 쿨타임
     public float dashCooldownTimer = 0f; // 대시 쿨타임 타이머
-    public float dashSpeed = 100f;   // 대시 속도
+    public float dashSpeed = 50f;   // 대시 속도
     public float maxDashTime = 0.1f; // 대시 지속 시간
     public float dashTimer = 0.5f;   // 현재 대시 시간
     public bool isInvincible = false; //무적 상태 여부
