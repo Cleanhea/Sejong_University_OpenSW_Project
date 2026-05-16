@@ -51,6 +51,8 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 
 [sourceFiles]
 Assets/_Project/Scripts/GamePlay/Player/
+ NewMonoBehaviourScript.cs
+ PlayerDash.cs
  PlayerMove.cs
  PlayerStat.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
