@@ -60,13 +60,13 @@
         "*.asset": "yaml",
         "*.meta": "yaml",
         "*.prefab": "yaml",
-        "*.unity": "yaml",
+        "*.unity": "yaml"
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "OpenSW_Project.slnx",
+    "dotnet.defaultSolution": "Sejong_University_OpenSW_Project.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
