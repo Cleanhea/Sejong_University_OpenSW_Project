@@ -20,7 +20,7 @@ public class PlayerStat : ScriptableObject
     public float invincibilityDuration = 2f; // 무적 지속 시간
     public float invincibilityTimer = 0f; // 무적 타이머
     public float knockbackForce = 20f; // 넉백 힘
-    public float knockbackDuration = 0.3f; // 넉백 지속 시간 (초)
+    public float knockbackDuration = 0.5f; // 넉백 지속 시간 (초)
     public bool isKnockedBack = false; // 넉백 중 여부
     public bool playerdead = false; //사망 판정
 }

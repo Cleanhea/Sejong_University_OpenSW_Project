@@ -287,6 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1349095235}
   - component: {fileID: 1349095234}
+  - component: {fileID: 1349095236}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -302,8 +303,8 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349095233}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 0.5, z: 1}
-  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellSize: {x: 2.5, y: 2.3, z: 1}
+  m_CellGap: {x: 1.5, y: -0, z: 0}
   m_CellLayout: 2
   m_CellSwizzle: 0
 --- !u!4 &1349095235
@@ -322,6 +323,27 @@ Transform:
   - {fileID: 1811877981}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1349095236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349095233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d262d2ce96dd247b711cabdeae3f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundSetting
+  tilemap: {fileID: 1811877983}
+  groundTile: {fileID: 11400000, guid: 3f02f11fbfafc4e45bc390afb0ffab9c, type: 2}
+  player: {fileID: 1639982697}
+  mapRadius: 7
+  preplacedRadius: 5
+  ringInterval: 0.08
+  playerCheckInterval: 0.2
+  dropHeight: 3
+  dropDuration: 0.3
 --- !u!1 &1501832444
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,6 +751,7 @@ GameObject:
   - component: {fileID: 1811877981}
   - component: {fileID: 1811877983}
   - component: {fileID: 1811877982}
+  - component: {fileID: 1811877984}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -845,6 +868,27 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1811877984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811877980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d262d2ce96dd247b711cabdeae3f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundSetting
+  tilemap: {fileID: 1811877983}
+  groundTile: {fileID: 0}
+  player: {fileID: 1639982697}
+  mapRadius: 10
+  preplacedRadius: 3
+  ringInterval: 0.08
+  playerCheckInterval: 0.2
+  dropHeight: 4
+  dropDuration: 0.3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
