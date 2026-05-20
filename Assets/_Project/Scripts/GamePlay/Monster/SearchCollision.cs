@@ -13,7 +13,7 @@ public class SearchCollision : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             meleeMonster._target = other.gameObject;
-            meleeMonster.State = MonsterState.Move;
+            meleeMonster.ChangeState(MonsterState.Move);
             Debug.Log("탐지");
         }
     }
