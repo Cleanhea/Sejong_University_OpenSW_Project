@@ -23,6 +23,7 @@ public class PlayerHit : MonoBehaviour
     public void Hit(float damage, Vector2 enemyPosition)
     {
         if(playerStat.isInvincible) return; //무적상태면 취소
+        if(playerStat.dashInvincible) return; //대시 무적 상태면 취소
         playerHealth.ApplyDamage(damage);
         StartCoroutine(KnockBack(enemyPosition));
         StartCoroutine(HitInvincible());

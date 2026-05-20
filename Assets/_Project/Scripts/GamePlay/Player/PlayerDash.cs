@@ -2,10 +2,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerDash : MonoBehaviour
 {
     [SerializeField] private PlayerStat playerStat;
-
+    private Rigidbody2D rb;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
     void Update()
     {
         if (playerStat.playerdead) return;
@@ -30,7 +35,7 @@ public class PlayerDash : MonoBehaviour
 
     IEnumerator Dash()
     {
-        playerStat.isInvincible = true;
+        playerStat.dashInvincible = true;
         playerStat.dashTimer = playerStat.maxDashTime;
 
         float x = Keyboard.current.aKey.isPressed ? -1f :
@@ -38,14 +43,17 @@ public class PlayerDash : MonoBehaviour
         float y = Keyboard.current.wKey.isPressed ?  1f :
                   Keyboard.current.sKey.isPressed ? -1f : 0;
 
+        Vector2 dashDir = new Vector2(x,y).normalized;
+
         while (playerStat.dashTimer > 0)
         {
-            transform.Translate(new Vector3(x, y, 0) * (playerStat.dashSpeed * Time.deltaTime));
+            rb.linearVelocity = dashDir * playerStat.dashSpeed;
             playerStat.dashTimer -= Time.deltaTime;
             yield return null;
         }
 
+        rb.linearVelocity = Vector2.zero;
         playerStat.currentDashCount--;
-        playerStat.isInvincible = false;
+        playerStat.dashInvincible = false;
     }
 }
