@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class SearchCollision : MonoBehaviour
 {
-    private IMonster meleeMonster;
+    private DefaultMonster monster;
 
     void Awake()
     {
-        meleeMonster = GetComponentInParent<IMonster>();
+        monster = GetComponentInParent<DefaultMonster>();
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            meleeMonster._target = other.gameObject;
-            meleeMonster.ChangeState(MonsterState.Move);
+            monster._target = other.gameObject;
+            monster.ChangeState(MonsterState.Move);
             Debug.Log("탐지");
         }
     }
