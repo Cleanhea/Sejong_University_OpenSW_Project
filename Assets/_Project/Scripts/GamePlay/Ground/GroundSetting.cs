@@ -11,7 +11,7 @@ public class GroundSetting : MonoBehaviour
     [SerializeField] private Transform player;
 
     [Header("Map Settings")]
-    [SerializeField] private int mapRadius = 10;
+    [SerializeField] private int mapRadius = 20;
     [SerializeField] private int preplacedRadius = 3;
     [SerializeField] private float ringInterval = 0.06f;
     [SerializeField] private float playerCheckInterval = 0.2f;
@@ -23,6 +23,7 @@ public class GroundSetting : MonoBehaviour
     private readonly HashSet<Vector3Int> placedCells = new HashSet<Vector3Int>();
     private readonly HashSet<Vector3Int> pendingCells = new HashSet<Vector3Int>();
     private Vector3Int lastPlayerCell;
+    private bool isInitialSpawnDone = false;
 
     void Start()
     {
@@ -39,7 +40,13 @@ public class GroundSetting : MonoBehaviour
 
         lastPlayerCell = tilemap.WorldToCell(player.position);
         PlaceImmediate(lastPlayerCell);
-        StartCoroutine(SpreadCircle(lastPlayerCell));
+        StartCoroutine(InitialSpread(lastPlayerCell));
+    }
+
+    IEnumerator InitialSpread(Vector3Int center)
+    {
+        yield return StartCoroutine(SpreadCircleAnimated(center));
+        isInitialSpawnDone = true;
         StartCoroutine(TrackPlayerMovement());
     }
 
@@ -53,13 +60,13 @@ public class GroundSetting : MonoBehaviour
             if (currentCell != lastPlayerCell)
             {
                 lastPlayerCell = currentCell;
-                StartCoroutine(SpreadCircle(currentCell));
+                SpreadCircleImmediate(currentCell);
             }
         }
     }
 
-    // 중심에서 링 순으로 새 타일만 퍼뜨림 — 이미 배치됐거나 낙하 중인 셀은 건너뜀
-    IEnumerator SpreadCircle(Vector3Int center)
+    // 초기 생성: 링 순서대로 드롭 애니메이션과 함께 퍼뜨림
+    IEnumerator SpreadCircleAnimated(Vector3Int center)
     {
         var cells = GetSortedCircleCells(center);
 
@@ -72,7 +79,19 @@ public class GroundSetting : MonoBehaviour
                     yield return new WaitForSeconds(ringInterval);
                 currentRing = ring;
             }
-            TryQueueTile(cell);
+            TryQueueDropTile(cell);
+        }
+    }
+
+    // 이동 후 생성: 애니메이션 없이 즉시 배치
+    void SpreadCircleImmediate(Vector3Int center)
+    {
+        var cells = GetSortedCircleCells(center);
+        foreach (var (cell, _) in cells)
+        {
+            if (placedCells.Contains(cell) || pendingCells.Contains(cell)) continue;
+            tilemap.SetTile(cell, groundTile);
+            placedCells.Add(cell);
         }
     }
 
@@ -91,7 +110,7 @@ public class GroundSetting : MonoBehaviour
         }
     }
 
-    bool TryQueueTile(Vector3Int cell)
+    bool TryQueueDropTile(Vector3Int cell)
     {
         if (placedCells.Contains(cell) || pendingCells.Contains(cell))
             return false;
