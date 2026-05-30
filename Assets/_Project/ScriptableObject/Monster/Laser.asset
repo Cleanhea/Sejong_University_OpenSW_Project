@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Laser
   m_EditorClassIdentifier: Assembly-CSharp::MonsterDataSO
   maxHealth: 6
-  MoveSpeed: 5
-  AttackRange: 5
+  MoveSpeed: 3
+  AttackRange: 5.5
   AttackDamage: 10
   idleSprites:
   - {fileID: 8208270978804853502, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}

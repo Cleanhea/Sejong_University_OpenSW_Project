@@ -99,6 +99,12 @@ public abstract class DefaultMonster : MonoBehaviour
         StartCoroutine(DieRoutine());
     }
 
+    public virtual void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+            Die();
+    }
     protected virtual IEnumerator DieRoutine()
     {
         PlayStateAnimation(MonsterState.Die, monsterDataSO.dieSprites, monsterDataSO.dieFrameDuration, loop: false);

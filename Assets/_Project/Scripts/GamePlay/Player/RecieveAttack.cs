@@ -25,23 +25,31 @@ public class RecieveAttack : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log($"Hit by: {collision.gameObject.name}, Tag: {collision.gameObject.tag}");
-        if (collision.collider.CompareTag("EnemyBullet") || collision.collider.CompareTag("EnemyLaser"))
+        if (collision.collider.CompareTag("EnemyAttack"))
+        {
+            CollisionHit(collision.collider);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log($"Hit by: {collision.gameObject.name}, Tag: {collision.gameObject.tag}");
+        if (collision.CompareTag("EnemyAttack"))
         {
             CollisionHit(collision);
         }
     }
-
     void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Enemy") || collision.collider.CompareTag("EnemyLaser"))
         {
-            CollisionHit(collision);
+            CollisionHit(collision.collider);
         }
     }
 
-    private void CollisionHit(Collision2D collision)
+    private void CollisionHit(Collider2D collision)
     {
-        IDamageDealer dealer = collision.collider.GetComponent<IDamageDealer>();
+        IDamageDealer dealer = collision.GetComponent<IDamageDealer>();
         float damage = dealer != null ? dealer.GetDamage() : 1f;
         playerHit.Hit(damage, collision.transform.position);
     }
