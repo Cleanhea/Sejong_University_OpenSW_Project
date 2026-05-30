@@ -58,12 +58,9 @@ public class Arrow : MonoBehaviour, IDamageDealer
     // RecieveAttack.CollisionHit()에서 이 값을 가져가 플레이어에게 데미지 적용
     public float GetDamage() => _damage;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        // 발사한 몬스터(또는 다른 몬스터)에 닿았으면 무시 — 스폰 직후 즉시 소멸 방지
-        if (collision.gameObject.GetComponentInParent<DefaultMonster>() != null) return;
-
-        // 벽·플레이어 등 나머지 충돌 시 소멸
+        if (!collision.CompareTag("Player")) return;
         Destroy(gameObject);
     }
 }

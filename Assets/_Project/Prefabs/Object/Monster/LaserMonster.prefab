@@ -48,9 +48,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907295778302601032, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907295778302601032, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907295778302601032, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6460733650830315324, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
       propertyPath: m_Name
       value: LaserMonster
+      objectReference: {fileID: 0}
+    - target: {fileID: 6460733650830315324, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1564862706944930162, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
@@ -200,7 +216,7 @@ MonoBehaviour:
   laserMaxRange: 17
   hitLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   previewColor: {r: 1, g: 0.2, b: 0.2, a: 0.35}
   fireColor: {r: 1, g: 0.15, b: 0.15, a: 1}
   previewWidth: 0.1
