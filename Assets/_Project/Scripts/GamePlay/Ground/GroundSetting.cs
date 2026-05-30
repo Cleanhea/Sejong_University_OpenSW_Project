@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,168 +7,148 @@ public class GroundSetting : MonoBehaviour
     [Header("References")]
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private TileBase groundTile;
-    [SerializeField] private Transform player;
 
     [Header("Map Settings")]
-    [SerializeField] private int mapRadius = 20;
-    [SerializeField] private int preplacedRadius = 3;
-    [SerializeField] private float ringInterval = 0.06f;
-    [SerializeField] private float playerCheckInterval = 0.2f;
+    [SerializeField] private int worldRadius = 500;
+    [SerializeField] private int safeRadius = 5;
+    [SerializeField] private int seed = 0;
 
-    [Header("Drop Animation")]
-    [SerializeField] private float dropHeight = 4f; // 타일이 떨어질 시작 높이 (월드 단위) - 타일이 생성될 때 이 높이에서 시작하여 땅으로 떨어짐
-    [SerializeField] private float dropDuration = 0.3f; // 타일이 떨어지는 데 걸리는 시간 (초) - 타일이 시작 높이에서 땅까지 떨어지는 데 걸리는 시간
-
-    private readonly HashSet<Vector3Int> placedCells = new HashSet<Vector3Int>();
-    private readonly HashSet<Vector3Int> pendingCells = new HashSet<Vector3Int>();
-    private Vector3Int lastPlayerCell;
-    private bool isInitialSpawnDone = false;
+    [Header("Cellular Automata")]
+    [SerializeField] [Range(0f, 1f)] private float initialFillRate = 0.48f;
+    [SerializeField] private int smoothIterations = 5;
+    [SerializeField] private int birthThreshold = 5;
+    [SerializeField] private int surviveThreshold = 4;
+    [SerializeField] [Range(0f, 1f)] private float edgeFadeStart = 0.75f;
 
     void Start()
     {
-        if (player == null)
-            player = GameObject.FindGameObjectWithTag("Player")?.transform;
         if (tilemap == null)
             tilemap = GetComponent<Tilemap>();
-
-        if (player == null || tilemap == null || groundTile == null)
+        if (tilemap == null || groundTile == null)
         {
             Debug.LogError("[GroundSetting] 필수 참조가 누락되었습니다.");
             return;
         }
 
-        lastPlayerCell = tilemap.WorldToCell(player.position);
-        PlaceImmediate(lastPlayerCell);
-        StartCoroutine(InitialSpread(lastPlayerCell));
+        var origin = tilemap.WorldToCell(transform.position);
+        var rng = seed == 0 ? new System.Random() : new System.Random(seed);
+        PlaceMap(origin, rng);
     }
 
-    IEnumerator InitialSpread(Vector3Int center)
+    void PlaceMap(Vector3Int center, System.Random rng)
     {
-        yield return StartCoroutine(SpreadCircleAnimated(center));
-        isInitialSpawnDone = true;
-        StartCoroutine(TrackPlayerMovement());
+        int size = worldRadius * 2 + 1;
+        long wr2 = (long)worldRadius * worldRadius;
+        long safeR2 = (long)safeRadius * safeRadius;
+
+        bool[,] grid = InitializeGrid(size, wr2, safeR2, rng);
+
+        for (int iter = 0; iter < smoothIterations; iter++)
+            grid = ApplyCA(grid, size, wr2, safeR2);
+
+        PlaceTiles(grid, center, wr2);
     }
 
-    IEnumerator TrackPlayerMovement()
+    bool[,] InitializeGrid(int size, long wr2, long safeR2, System.Random rng)
     {
-        while (true)
+        bool[,] grid = new bool[size, size];
+        int r = worldRadius;
+
+        for (int x = -r; x <= r; x++)
         {
-            yield return new WaitForSeconds(playerCheckInterval);
-
-            Vector3Int currentCell = tilemap.WorldToCell(player.position);
-            if (currentCell != lastPlayerCell)
+            for (int y = -r; y <= r; y++)
             {
-                lastPlayerCell = currentCell;
-                SpreadCircleImmediate(currentCell);
+                long d2 = (long)x * x + (long)y * y;
+                if (d2 > wr2) continue;
+
+                int gx = x + r;
+                int gy = y + r;
+
+                if (d2 <= safeR2)
+                {
+                    grid[gx, gy] = true;
+                    continue;
+                }
+
+                // 가장자리로 갈수록 초기 육지 확률을 줄여 자연스러운 해안선 형성
+                float t = (float)System.Math.Sqrt(d2) / r;
+                float fill = initialFillRate * (1f - Mathf.SmoothStep(edgeFadeStart, 1f, t));
+                grid[gx, gy] = rng.NextDouble() < fill;
             }
         }
+        return grid;
     }
 
-    // 초기 생성: 링 순서대로 드롭 애니메이션과 함께 퍼뜨림
-    IEnumerator SpreadCircleAnimated(Vector3Int center)
+    bool[,] ApplyCA(bool[,] grid, int size, long wr2, long safeR2)
     {
-        var cells = GetSortedCircleCells(center);
+        bool[,] next = new bool[size, size];
+        int r = worldRadius;
 
-        int currentRing = -1;
-        foreach (var (cell, ring) in cells)
+        for (int x = -r; x <= r; x++)
         {
-            if (ring != currentRing)
+            for (int y = -r; y <= r; y++)
             {
-                if (currentRing >= 0)
-                    yield return new WaitForSeconds(ringInterval);
-                currentRing = ring;
-            }
-            TryQueueDropTile(cell);
-        }
-    }
+                long d2 = (long)x * x + (long)y * y;
+                if (d2 > wr2) continue;
 
-    // 이동 후 생성: 애니메이션 없이 즉시 배치
-    void SpreadCircleImmediate(Vector3Int center)
-    {
-        var cells = GetSortedCircleCells(center);
-        foreach (var (cell, _) in cells)
-        {
-            if (placedCells.Contains(cell) || pendingCells.Contains(cell)) continue;
-            tilemap.SetTile(cell, groundTile);
-            placedCells.Add(cell);
-        }
-    }
+                int gx = x + r;
+                int gy = y + r;
 
-    void PlaceImmediate(Vector3Int center)
-    {
-        for (int x = -preplacedRadius; x <= preplacedRadius; x++)
-        {
-            for (int y = -preplacedRadius; y <= preplacedRadius; y++)
-            {
-                if (Mathf.Sqrt(x * x + y * y) > preplacedRadius) continue;
+                if (d2 <= safeR2)
+                {
+                    next[gx, gy] = true;
+                    continue;
+                }
 
-                var cell = new Vector3Int(center.x + x, center.y + y, center.z);
-                tilemap.SetTile(cell, groundTile);
-                placedCells.Add(cell);
+                int neighbors = CountNeighbors(grid, gx, gy, size, x, y, wr2);
+                next[gx, gy] = grid[gx, gy] ? neighbors >= surviveThreshold : neighbors >= birthThreshold;
             }
         }
+        return next;
     }
 
-    bool TryQueueDropTile(Vector3Int cell)
+    int CountNeighbors(bool[,] grid, int gx, int gy, int size, int wx, int wy, long wr2)
     {
-        if (placedCells.Contains(cell) || pendingCells.Contains(cell))
-            return false;
-
-        pendingCells.Add(cell);
-        StartCoroutine(DropTile(cell));
-        return true;
-    }
-
-    IEnumerator DropTile(Vector3Int cellPos)
-    {
-        Vector3 landPos = tilemap.GetCellCenterWorld(cellPos);
-        Vector3 startPos = landPos + Vector3.down * dropHeight;
-
-        GameObject go = new GameObject("FallingTile");
-        SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
-
-        if (groundTile is Tile tile)
-            sr.sprite = tile.sprite;
-
-        TilemapRenderer tmr = tilemap.GetComponent<TilemapRenderer>();
-        sr.sortingLayerName = tmr.sortingLayerName;
-        sr.sortingOrder = tmr.sortingOrder - 1;
-        go.transform.position = startPos;
-
-        float elapsed = 0f;
-        while (elapsed < dropDuration)
+        int count = 0;
+        for (int dx = -1; dx <= 1; dx++)
         {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / dropDuration);
-            go.transform.position = Vector3.Lerp(startPos, landPos, t * t); // 중력 가속
-            yield return null;
-        }
-
-        tilemap.SetTile(cellPos, groundTile);
-        placedCells.Add(cellPos);
-        pendingCells.Remove(cellPos);
-        Destroy(go);
-    }
-
-    // 유클리드 거리 기반으로 원형 내 셀을 링 순서로 정렬하여 반환
-    List<(Vector3Int cell, int ring)> GetSortedCircleCells(Vector3Int center)
-    {
-        var result = new List<(Vector3Int, int)>();
-
-        for (int x = -mapRadius; x <= mapRadius; x++)
-        {
-            for (int y = -mapRadius; y <= mapRadius; y++)
+            for (int dy = -1; dy <= 1; dy++)
             {
-                float dist = Mathf.Sqrt(x * x + y * y);
-                if (dist > mapRadius) continue;
+                if (dx == 0 && dy == 0) continue;
 
-                var cell = new Vector3Int(center.x + x, center.y + y, center.z);
-                if (!placedCells.Contains(cell) && !pendingCells.Contains(cell))
-                    result.Add((cell, Mathf.RoundToInt(dist)));
+                int nx = gx + dx;
+                int ny = gy + dy;
+                if (nx < 0 || nx >= size || ny < 0 || ny >= size) continue;
+
+                // 원 밖 셀은 바다로 처리 (카운트 제외)
+                long nd2 = (long)(wx + dx) * (wx + dx) + (long)(wy + dy) * (wy + dy);
+                if (nd2 > wr2) continue;
+
+                if (grid[nx, ny]) count++;
+            }
+        }
+        return count;
+    }
+
+    void PlaceTiles(bool[,] grid, Vector3Int center, long wr2)
+    {
+        int r = worldRadius;
+        var positions = new List<Vector3Int>();
+        var tiles = new List<TileBase>();
+
+        for (int x = -r; x <= r; x++)
+        {
+            for (int y = -r; y <= r; y++)
+            {
+                if ((long)x * x + (long)y * y > wr2) continue;
+                if (grid[x + r, y + r])
+                {
+                    positions.Add(new Vector3Int(center.x + x, center.y + y, center.z));
+                    tiles.Add(groundTile);
+                }
             }
         }
 
-        result.Sort((a, b) => a.Item2.CompareTo(b.Item2));
-        return result;
+        tilemap.SetTiles(positions.ToArray(), tiles.ToArray());
     }
 }
