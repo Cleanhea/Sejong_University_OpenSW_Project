@@ -60,5 +60,5 @@ MonoBehaviour:
   - {fileID: 991454503, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
   - {fileID: 1352893233, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
   dieFrameDuration: 0.15
-  attackEffectPrefab: {fileID: 4423854640748271040, guid: 29104cf0f2da3394e928dc3d64214cfc, type: 3}
+  attackEffectPrefab: {fileID: 4423854640748271040, guid: 942aa80771f5b8d42b80aa2e1ba693b3, type: 3}
   effectDuration: 0.7
