@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Sejong_University_OpenSW_Project.slnx",
+    "dotnet.defaultSolution": "OpenSW.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
