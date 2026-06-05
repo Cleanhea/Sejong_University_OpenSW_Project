@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerWeaponInventory : MonoBehaviour
 {
     [SerializeField] private List<WeaponStat> weaponSlots = new List<WeaponStat>(); // 해금된 무기 슬롯
-    [SerializeField] private int maxSlotCount = 4;                                  // 최대 슬롯 수
+    [SerializeField] private int maxSlotCount = 5;                                  // 최대 슬롯 수
     [SerializeField] private bool equipFirstWeaponOnAwake = true;                   // 시작 시 첫 무기 장착
 
     private PlayerWeapon playerWeapon; // 무기 발사 컴포넌트 캐시
@@ -42,6 +42,7 @@ public class PlayerWeaponInventory : MonoBehaviour
         if (Keyboard.current.digit2Key.wasPressedThisFrame) EquipSlot(1);
         if (Keyboard.current.digit3Key.wasPressedThisFrame) EquipSlot(2);
         if (Keyboard.current.digit4Key.wasPressedThisFrame) EquipSlot(3);
+        if (Keyboard.current.digit5Key.wasPressedThisFrame) EquipSlot(4);
     }
 
     /// <summary>
