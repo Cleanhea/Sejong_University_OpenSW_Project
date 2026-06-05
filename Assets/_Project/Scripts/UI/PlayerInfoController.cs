@@ -7,6 +7,7 @@ public class PlayerInfoController : MonoBehaviour
     public class WeaponSlot
     {
         public Image slotImage;
+        public Image borderImage;
         public Sprite emptySprite;
         public bool isUnlocked = false;
     }    
@@ -16,8 +17,6 @@ public class PlayerInfoController : MonoBehaviour
 
     [Header("Weapon Slots")]
     [SerializeField] private WeaponSlot[] weaponSlots = new WeaponSlot[4];
-    [SerializeField] private Color lockedColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
-    [SerializeField] private Color unlockedColor = Color.white;
 
     [Header("Dash Cooldowns")]
     [SerializeField] private Image[] dashImages = new Image[3];
@@ -38,7 +37,7 @@ public class PlayerInfoController : MonoBehaviour
 
             weaponSlots[i].isUnlocked = (i == 0); // Unlock the first slot by default
         }
-        UpdateWeaponSlotUI();
+        ChangeActiveWeaponBorder(0);
 
         for(int i = 0; i < dashImages.Length; i++)
         {
@@ -77,17 +76,7 @@ public class PlayerInfoController : MonoBehaviour
         }
     }
 
-    // Wapon Slot Unlocking Method
-    private void UpdateWeaponSlotUI()
-    {
-        for (int i = 0; i < weaponSlots.Length; i++)
-        {
-            if (weaponSlots[i].slotImage == null) continue;
-            weaponSlots[i].slotImage.color = weaponSlots[i].isUnlocked ? unlockedColor : lockedColor;
-        }
-    }
-
-    public void UnlockWapon(int slotIndex, Sprite newWeaponSprite = null)
+    public void UnlockWeapon(int slotIndex, Sprite newWeaponSprite = null)
     {
         if(slotIndex >= 0 && slotIndex < weaponSlots.Length)
         {
@@ -98,7 +87,15 @@ public class PlayerInfoController : MonoBehaviour
                 weaponSlots[slotIndex].slotImage.sprite = newWeaponSprite;
             }
 
-            UpdateWeaponSlotUI();
+        }
+    }
+
+    public void ChangeActiveWeaponBorder(int activeSlotIndex)
+    {
+        for (int i = 0; i < weaponSlots.Length; i++)
+        {
+            if (weaponSlots[i].borderImage == null) continue;
+            weaponSlots[i].borderImage.gameObject.SetActive(i == activeSlotIndex);
         }
     }
 }
