@@ -43,6 +43,25 @@ public class PlayerWeapon : MonoBehaviour
     // 현재 조준 방향으로 풀에서 총알을 꺼내 발사합니다.
     private void Fire()
     {
+        switch (weaponStat.weaponKind)
+        {
+            case WeaponKind.BasicGun:
+            case WeaponKind.SniperRifle:
+            case WeaponKind.SubmachineGun:
+                FireSingleBullet();
+                break;
+            case WeaponKind.ShortRangeAoe:
+            case WeaponKind.LongRangeAoe:
+                Debug.LogWarning($"[PlayerWeapon] {weaponStat.weaponKind} fire mode is not implemented yet.");
+                break;
+            default:
+                FireSingleBullet();
+                break;
+        }
+    }
+
+    private void FireSingleBullet()
+    {
         // 1. 발사 위치와 회전을 결정합니다.
         Vector3 firePosition = muzzle != null ? muzzle.position : transform.position;
         Quaternion fireRotation = Quaternion.Euler(0f, 0f, playerAim.AimAngleDeg);

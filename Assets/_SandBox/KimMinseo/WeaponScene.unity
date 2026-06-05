@@ -1190,7 +1190,7 @@ MonoBehaviour:
   weaponSlots:
   - {fileID: 11400000, guid: 490ea5d8ccf0e3b4b96d7153856338c9, type: 2}
   - {fileID: 11400000, guid: fa189095d83714348ae3dc12a60660c3, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: aed741c8c8bf4a94ab184a23b7205d6a, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   maxSlotCount: 5
