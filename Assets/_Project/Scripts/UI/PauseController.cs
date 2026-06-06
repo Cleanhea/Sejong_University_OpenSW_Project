@@ -34,8 +34,8 @@ public class PauseController : MonoBehaviour
     
     void Update()
     {
-        if (UnityEngine.InputSystem.Keyboard.current != null && 
-            UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
+        Debug.Log("Escape key pressed. Toggling pause.");
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(optionsPanel != null && optionsPanel.activeSelf)
             {

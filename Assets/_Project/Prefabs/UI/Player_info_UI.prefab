@@ -75,6 +75,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1574182718758795998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 268483343938206184}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &268483343938206184
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574182718758795998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4295985619955792245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7462096881597340126
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +141,7 @@ RectTransform:
   m_Children:
   - {fileID: 1907547884824544453}
   - {fileID: 7128278035101446882}
+  - {fileID: 4156549108993379188}
   - {fileID: 4295985619955792245}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -276,7 +312,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4295985619955792245}
+    m_TransformParent: {fileID: 7537382708949605305}
     m_Modifications:
     - target: {fileID: 1597878037843115224, guid: e8ebe7a03826248edafec853ef37240c, type: 3}
       propertyPath: m_Pivot.x
@@ -292,7 +328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1597878037843115224, guid: e8ebe7a03826248edafec853ef37240c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1597878037843115224, guid: e8ebe7a03826248edafec853ef37240c, type: 3}
       propertyPath: m_AnchorMin.x
@@ -300,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1597878037843115224, guid: e8ebe7a03826248edafec853ef37240c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1597878037843115224, guid: e8ebe7a03826248edafec853ef37240c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -340,11 +376,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1597878037843115224, guid: e8ebe7a03826248edafec853ef37240c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 469.30005
       objectReference: {fileID: 0}
     - target: {fileID: 1597878037843115224, guid: e8ebe7a03826248edafec853ef37240c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -446.42
       objectReference: {fileID: 0}
     - target: {fileID: 1597878037843115224, guid: e8ebe7a03826248edafec853ef37240c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1234,12 +1270,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -86.69997
       objectReference: {fileID: 0}
+    - target: {fileID: 8335973130085336869, guid: c0a5f7b5c97a64cc8a5d6c1e17238a3b, type: 3}
+      propertyPath: m_ChildForceExpandWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8335973130085336869, guid: c0a5f7b5c97a64cc8a5d6c1e17238a3b, type: 3}
+      propertyPath: m_ChildForceExpandHeight
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5429853329195367415, guid: c0a5f7b5c97a64cc8a5d6c1e17238a3b, type: 3}
       insertIndex: 5
-      addedObject: {fileID: 4156549108993379188}
+      addedObject: {fileID: 268483343938206184}
     - targetCorrespondingSourceObject: {fileID: 1339714785356643111, guid: c0a5f7b5c97a64cc8a5d6c1e17238a3b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3881748694918492689}

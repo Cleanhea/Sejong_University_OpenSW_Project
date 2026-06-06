@@ -7,6 +7,7 @@ public class MonsterHPController : MonoBehaviour
 {
     [Header("HP Settings")]
     [SerializeField] private float maxHP = 100f;
+    [SerializeField] private DefaultMonster monster; // 몬스터 스크립트 참조
     private float currentHP;
 
     [Header("UI Components")]
@@ -22,8 +23,14 @@ public class MonsterHPController : MonoBehaviour
 
     void Start()
     {
+        // 몬스터의 최대 체력(MonsterDataSO.maxHealth)에 맞춰 maxHP 설정
+        if(monster != null)
+        {
+            maxHP = monster._maxHealth;
+        }
+
         currentHP = maxHP;
-        
+
         if(hpSlider != null)
         {
             hpSlider.maxValue = maxHP;

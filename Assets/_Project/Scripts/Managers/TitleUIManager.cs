@@ -45,7 +45,7 @@ public class TitleUIManager : MonoBehaviour
     }
 
     // 새 게임 시작: 점수 초기화 후 게임 씬으로 이동
-    private void OnNewGame()
+    public void OnNewGame()
     {
         if (ScoreManager.Instance != null)
             ScoreManager.Instance.ResetScore();
@@ -65,14 +65,14 @@ public class TitleUIManager : MonoBehaviour
     }
 
     // 설정 창 토글
-    private void OnSettings()
+    public void OnSettings()
     {
         if (settingsPanel == null) return;
         settingsPanel.SetActive(!settingsPanel.activeSelf);
     }
 
     // 게임 종료
-    private void OnExit()
+    public void OnExit()
     {
 #if UNITY_EDITOR
         // 에디터에서는 플레이 모드 종료

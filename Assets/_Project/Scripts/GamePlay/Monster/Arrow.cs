@@ -61,6 +61,7 @@ public class Arrow : MonoBehaviour, IDamageDealer
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
+        collision.GetComponent<PlayerHit>()?.Hit(_damage, transform.position);
         Destroy(gameObject);
     }
 }

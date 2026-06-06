@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(PlayerDash))]
@@ -6,7 +7,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private PlayerStat playerStat;
-
+    private string EndingSceneName = "";
     void Start()
     {
         playerStat.currentHp = playerStat.maxHp;
@@ -45,5 +46,7 @@ public class PlayerHealth : MonoBehaviour
         GetComponent<PlayerDash>().enabled = false;
         // TODO: 사망 애니메이션, 게임오버 UI
         Debug.Log("Player Dead");
+        playerStat.isKnockedBack = false;
+        SceneManager.LoadScene("EndingScene");
     }
 }
