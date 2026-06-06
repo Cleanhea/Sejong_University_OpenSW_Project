@@ -158,8 +158,8 @@ MonoBehaviour:
   killCountSO: {fileID: 11400000, guid: 0c3d6d76b9911cc448726adc60a4d171, type: 2}
   currentHealth: 0
   attackPoint: {fileID: 0}
-  attackRadius: 0.7
-  attackWindup: 1
+  attackRadius: 1.5
+  attackWindup: 0.3
   attackNextDelay: 0.3
 --- !u!212 &3907295778302601032
 SpriteRenderer:
@@ -352,7 +352,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 10
+  m_Radius: 20
 --- !u!114 &868090046300751677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +373,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2485254388157602485}
     m_Modifications:
+    - target: {fileID: 515913586091518863, guid: 0bc0731d123a249feb72b4cebd8bdc55, type: 3}
+      propertyPath: monster
+      value: 
+      objectReference: {fileID: 1564862706944930162}
     - target: {fileID: 2315955855871820287, guid: 0bc0731d123a249feb72b4cebd8bdc55, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

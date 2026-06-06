@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerStat", menuName = "Stats/PlayerStat")]
@@ -22,4 +23,6 @@ public class PlayerStat : ScriptableObject
     public float knockbackDuration = 0.5f; // 넉백 지속 시간 (초)
     public bool isKnockedBack = false; // 넉백 중 여부
     public bool playerdead = false; //사망 판정
+    public TimeSpan playTime;
+    public KillCountSO killCountSO; // 킬 카운트 ScriptableObject 참조
 }

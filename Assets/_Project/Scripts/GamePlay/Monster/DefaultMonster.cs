@@ -52,6 +52,10 @@ public abstract class DefaultMonster : MonoBehaviour
     protected virtual void Start()
     {
         currentHealth = _maxHealth;
+
+        // HP바에 이 몬스터의 최대 체력을 전달해 슬라이더 최대치를 맞춘다.
+        if (hpController != null)
+            hpController.SetMaxHP(_maxHealth);
     }
 
     protected virtual void FixedUpdate()

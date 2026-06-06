@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8c0a0ff0eaaec459028b4c02f4346b, type: 3}
   m_Name: Range
   m_EditorClassIdentifier: Assembly-CSharp::MonsterDataSO
-  maxHealth: 15
+  maxHealth: 35
   MoveSpeed: 5
   AttackRange: 6
-  AttackDamage: 8
+  AttackDamage: 12
   idleSprites:
   - {fileID: 8208270978804853502, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
   - {fileID: 6136327500665522839, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
