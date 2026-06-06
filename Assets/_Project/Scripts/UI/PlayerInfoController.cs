@@ -16,7 +16,7 @@ public class PlayerInfoController : MonoBehaviour
     [SerializeField] private Slider hpSlider;
 
     [Header("Weapon Slots")]
-    [SerializeField] private WeaponSlot[] weaponSlots = new WeaponSlot[4];
+    [SerializeField] private WeaponSlot[] weaponSlots = new WeaponSlot[5];
 
     [Header("Dash Cooldowns")]
     [SerializeField] private Image[] dashImages = new Image[3];
