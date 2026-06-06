@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponStat
   weaponKind: 3
   displayName: "\uD68C\uC624\uB9AC"
-  inventoryIcon: {fileID: 21300000, guid: 192ef4e407affec4192dff5a7ecaded0, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: ab4e7d546e87fb34e821115f4066a62a, type: 3}
   equippedSprite: {fileID: 21300000, guid: 192ef4e407affec4192dff5a7ecaded0, type: 3}
   unlockedByDefault: 0
   damage: 18

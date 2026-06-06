@@ -23,6 +23,7 @@ public class PlayerInfoController : MonoBehaviour
 
     [Header("Player Stat Data Connector ")]
     [SerializeField] private PlayerStat playerStat;
+    [SerializeField] private PlayerWeaponInventory playerWeaponInventory;
 
     void Start()
     {
@@ -43,6 +44,8 @@ public class PlayerInfoController : MonoBehaviour
         {
             if(dashImages[i] != null) dashImages[i].fillAmount = 0f;
         }
+
+        SyncWeaponSlotsWithInventory();
     }
 
     void Update()
@@ -96,6 +99,22 @@ public class PlayerInfoController : MonoBehaviour
         {
             if (weaponSlots[i].borderImage == null) continue;
             weaponSlots[i].borderImage.gameObject.SetActive(i == activeSlotIndex);
+        }
+    }
+
+    private void SyncWeaponSlotsWithInventory()
+    {
+        if (playerWeaponInventory == null)
+            playerWeaponInventory = FindObjectOfType<PlayerWeaponInventory>();
+
+        if (playerWeaponInventory == null) return;
+
+        for (int i = 0; i < playerWeaponInventory.WeaponSlots.Count && i < weaponSlots.Length; i++)
+        {
+            WeaponStat weaponStat = playerWeaponInventory.WeaponSlots[i];
+            if (weaponStat == null) continue;
+
+            UnlockWeapon(i, weaponStat.inventoryIcon);
         }
     }
 }

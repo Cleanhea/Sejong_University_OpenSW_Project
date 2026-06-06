@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponStat
   weaponKind: 0
   displayName: "\uAE30\uBCF8\uCD1D"
-  inventoryIcon: {fileID: 21300000, guid: ad86cc93a4b60aa4096694e03a371eab, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: 319f06571f4b082419c5de08a80966ea, type: 3}
   equippedSprite: {fileID: 21300000, guid: ad86cc93a4b60aa4096694e03a371eab, type: 3}
   unlockedByDefault: 1
   damage: 10
   fireInterval: 0.25
   projectileSpeed: 15
   projectileLifetime: 1.5
+  aoeRadius: 2
+  maxChargeTime: 1.5
+  maxChargeMultiplier: 2
