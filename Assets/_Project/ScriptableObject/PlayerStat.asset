@@ -14,18 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStat
   maxHp: 100
   currentHp: 100
-  attackPower: 10
   defensePower: 5
   speed: 5
   maxDashCount: 3
   currentDashCount: 3
   dashCooldown: 2
-  dashCooldownTimer: 0
-  dashSpeed: 50
-  maxDashTime: 0.1
-  dashTimer: 0.5
+  dashCooldownTimer: 2
+  dashSpeed: 30
+  maxDashTime: 0.2
+  dashTimer: -0.0003888246
+  dashInvincible: 0
   isInvincible: 0
   invincibilityDuration: 2
   invincibilityTimer: 0
-  knockbackForce: 5
+  knockbackForce: 20
+  knockbackDuration: 0.5
+  isKnockedBack: 0
   playerdead: 0

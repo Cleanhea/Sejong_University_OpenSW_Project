@@ -7,7 +7,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Rigidbody2D rb;                // 물리 컴포넌트
-    private float damage;                  // 데미지 값
+    private int damage;                    // 데미지 값
     private Action<Bullet> releaseToPool;  // 풀 반납 콜백
     private Coroutine lifeRoutine;         // 수명 코루틴 핸들
     private bool released;                 // 반납 중복 방지 플래그
@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
     /// <param name="speed">이동 속도입니다.</param>
     /// <param name="damageAmount">충돌 시 입힐 데미지 값입니다.</param>
     /// <param name="lifetime">자동 반납까지의 수명(초)입니다.</param>
-    public void Launch(Vector2 direction, float speed, float damageAmount, float lifetime)
+    public void Launch(Vector2 direction, float speed, int damageAmount, float lifetime)
     {
         // 1. 재사용 시점이므로 이전 상태를 초기화합니다.
         released = false;
@@ -55,11 +55,20 @@ public class Bullet : MonoBehaviour
         // 1. 이미 반납 처리되었다면 중복 발화를 무시합니다.
         if (released) return;
 
-        // 2. 데미지를 받을 수 있는 대상이면 데미지를 입히고 풀로 반납합니다.
+        // 2. 공용 데미지 인터페이스가 있으면 우선 적용하고 풀로 반납합니다.
         IDamageable damageable = other.GetComponentInParent<IDamageable>();
         if (damageable != null)
         {
             damageable.TakeDamage(damage);
+            Release();
+            return;
+        }
+
+        // 3. 몬스터 부모 클래스가 있으면 몬스터 체력을 직접 감소시키고 풀로 반납합니다.
+        DefaultMonster monster = other.GetComponent<DefaultMonster>();
+        if (monster != null)
+        {
+            monster.TakeDamage(damage);
             Release();
         }
     }

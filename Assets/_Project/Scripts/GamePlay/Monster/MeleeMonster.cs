@@ -65,9 +65,9 @@ public class MeleeMonster : DefaultMonster
         Collider2D[] hits = Physics2D.OverlapCircleAll(telegraphPosition, attackRadius);
         foreach (Collider2D hit in hits)
         {
-            Dummy dummy = hit.GetComponent<Dummy>();
-            if (dummy != null)
-                dummy.TakeDamage((int)_AttackDamage);
+            PlayerHit playerHit = hit.GetComponent<PlayerHit>();
+            if (playerHit != null)
+                playerHit.Hit(_AttackDamage, telegraphPosition);
         }
 
         if (animCoroutine != null)

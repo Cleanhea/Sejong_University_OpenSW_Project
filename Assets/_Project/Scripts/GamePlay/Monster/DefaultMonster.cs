@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -15,6 +16,15 @@ public abstract class DefaultMonster : MonoBehaviour
     protected Coroutine _stateAnimCoroutine;
     protected MonsterState? _lastAnimState;
     protected bool isStateNotChangeable = false;
+
+    [Header("Pathfinding")]
+    [SerializeField] protected float pathRefreshInterval = 0.5f;
+
+    protected List<Vector2> _path;
+    protected int           _pathIndex;
+    protected float         _pathTimer;
+
+    private const float WaypointRadius = 0.4f;
 
     public MonsterState State { get; set; }
     public GameObject _target { get; set; }
@@ -66,25 +76,48 @@ public abstract class DefaultMonster : MonoBehaviour
         }
 
         Vector2 targetPosition = _target.transform.position;
-        Vector2 direction = targetPosition - _rigidbody.position;
 
-        if (direction.magnitude <= _AttackRange)
+        if ((_rigidbody.position - targetPosition).magnitude <= _AttackRange)
         {
             ChangeState(MonsterState.Attack);
             return;
         }
 
-        Vector2 moveDirection = direction.normalized;
-        Vector2 nextPosition = Vector2.MoveTowards(
-            _rigidbody.position,
-            targetPosition,
-            _MoveSpeed * Time.fixedDeltaTime
-        );
-        PlayStateAnimation(MonsterState.Move, monsterDataSO.moveSprites, monsterDataSO.moveFrameDuration, loop: true);
-        _rigidbody.MovePosition(nextPosition);
+        // 경로 갱신 조건: 타이머 만료, 경로 없음, 웨이포인트 모두 소진
+        _pathTimer -= Time.fixedDeltaTime;
+        bool pathExhausted = _path == null || _pathIndex >= _path.Count;
+        if (_pathTimer <= 0f || pathExhausted)
+        {
+            _path      = PathfindingManager.Instance?.FindPath(_rigidbody.position, targetPosition);
+            _pathIndex = 1; // index 0은 현재 위치 셀이므로 건너뜀
+            _pathTimer = pathRefreshInterval;
+        }
 
-        if (moveDirection.x != 0)
-            _spriteRenderer.flipX = moveDirection.x < 0;
+        // 다음 웨이포인트 결정
+        Vector2 waypoint;
+        if (_path != null && _pathIndex < _path.Count)
+        {
+            waypoint = _path[_pathIndex];
+            if (Vector2.Distance(_rigidbody.position, waypoint) < WaypointRadius)
+            {
+                _pathIndex++;
+                if (_pathIndex >= _path.Count) return;
+                waypoint = _path[_pathIndex];
+            }
+        }
+        else
+        {
+            waypoint = targetPosition; // A* 실패 시 직선 이동 폴백
+        }
+
+        Vector2 moveDir  = (waypoint - _rigidbody.position).normalized;
+        Vector2 nextPos  = Vector2.MoveTowards(_rigidbody.position, waypoint, _MoveSpeed * Time.fixedDeltaTime);
+
+        PlayStateAnimation(MonsterState.Move, monsterDataSO.moveSprites, monsterDataSO.moveFrameDuration, loop: true);
+        _rigidbody.MovePosition(nextPos);
+
+        if (moveDir.x != 0)
+            _spriteRenderer.flipX = moveDir.x < 0;
     }
 
     // 각 몬스터 타입마다 공격 방식이 달라서 반드시 구현 필요
@@ -99,6 +132,12 @@ public abstract class DefaultMonster : MonoBehaviour
         StartCoroutine(DieRoutine());
     }
 
+    public virtual void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+            Die();
+    }
     protected virtual IEnumerator DieRoutine()
     {
         PlayStateAnimation(MonsterState.Die, monsterDataSO.dieSprites, monsterDataSO.dieFrameDuration, loop: false);

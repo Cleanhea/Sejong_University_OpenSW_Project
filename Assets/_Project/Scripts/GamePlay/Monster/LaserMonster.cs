@@ -130,17 +130,13 @@ public class LaserMonster : DefaultMonster
         Vector2 endPoint;
         if (hit.collider != null)
         {
-            endPoint = hit.point;
 
             // 플레이어에게 직접 데미지 적용 (충돌 이벤트 없이 즉시 판정)
             if (hit.collider.TryGetComponent(out PlayerHit playerHit))
                 playerHit.Hit(_AttackDamage, origin);
+            Debug.Log("Hit : " + hit.collider.gameObject.name);
         }
-        else
-        {
-            endPoint = origin + direction * laserMaxRange;
-        }
-
+        endPoint = origin + direction * laserMaxRange;
         float actualRange = Vector2.Distance(origin, endPoint);
         DrawLaser(origin, direction, actualRange, fireColor, fireWidth);
     }

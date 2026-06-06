@@ -48,6 +48,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907295778302601032, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907295778302601032, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8535939
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907295778302601032, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6460733650830315324, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
       propertyPath: m_Name
       value: RangeMonster
