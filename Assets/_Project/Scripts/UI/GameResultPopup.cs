@@ -78,11 +78,11 @@ public class GameResultPopup : MonoBehaviour
         }
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(totalSeconds);
-        timeText.text = string.Format("Time: {0:D2}:{1:D2}:{2:D2}",
-            timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+        timeText.text = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                playerStat.playTime.Hours, playerStat.playTime.Minutes, playerStat.playTime.Seconds);
 
         if (totalScoreText != null)
-            totalScoreText.text = currentScore.ToString("D3");
+            totalScoreText.text = playerStat.killCountSO.KillCount.ToString("D3");
     }
 
     // Method to add score
@@ -99,7 +99,8 @@ public class GameResultPopup : MonoBehaviour
         if(scoreText != null)
             scoreText.text = "Score: ";
         if (totalScoreText != null)
-            totalScoreText.text = currentScore.ToString("D3");
+            totalScoreText.text = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                playerStat.playTime.Hours, playerStat.playTime.Minutes, playerStat.playTime.Seconds);
     }
 
     private void OnRestartButtonClicked()

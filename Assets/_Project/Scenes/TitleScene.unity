@@ -609,6 +609,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Main
       objectReference: {fileID: 0}
+    - target: {fileID: 8668471887657991385, guid: 6a65cd1d5349d4f9e9bdf40b66b7354a, type: 3}
+      propertyPath: m_text
+      value: Bug Hunter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668471887657991385, guid: 6a65cd1d5349d4f9e9bdf40b66b7354a, type: 3}
+      propertyPath: m_fontSize
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2445361071935631092, guid: 6a65cd1d5349d4f9e9bdf40b66b7354a, type: 3}
     m_RemovedGameObjects: []

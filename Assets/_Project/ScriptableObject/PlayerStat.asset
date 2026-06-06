@@ -25,9 +25,10 @@ MonoBehaviour:
   dashTimer: -0.0003888246
   dashInvincible: 0
   isInvincible: 0
-  invincibilityDuration: 2
+  invincibilityDuration: 0.4
   invincibilityTimer: 0
   knockbackForce: 20
   knockbackDuration: 0.5
-  isKnockedBack: 0
+  isKnockedBack: 1
   playerdead: 0
+  killCountSO: {fileID: 11400000, guid: 0c3d6d76b9911cc448726adc60a4d171, type: 2}
