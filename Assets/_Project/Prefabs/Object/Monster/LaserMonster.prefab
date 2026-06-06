@@ -80,6 +80,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3242318435220980271}
   m_SourcePrefab: {fileID: 100100000, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
+--- !u!114 &8448246491869862865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5910593239191318672, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
+  m_PrefabInstance: {fileID: 2826174037372513089}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 733cdf233c52549bd96fe6a3772d68e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterHPController
 --- !u!1 &9120270102802097277 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6460733650830315324, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
@@ -208,6 +219,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserMonster
   monsterDataSO: {fileID: 11400000, guid: 8cf82fba1bc7dfb47ad697cf55fda595, type: 2}
+  pathRefreshInterval: 0.5
+  hpController: {fileID: 8448246491869862865}
+  killCountSO: {fileID: 11400000, guid: 0c3d6d76b9911cc448726adc60a4d171, type: 2}
   currentHealth: 0
   firePoint: {fileID: 0}
   attackWindup: 1.5

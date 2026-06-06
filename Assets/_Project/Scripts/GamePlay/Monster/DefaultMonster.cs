@@ -19,8 +19,10 @@ public abstract class DefaultMonster : MonoBehaviour
 
     [Header("Pathfinding")]
     [SerializeField] protected float pathRefreshInterval = 0.5f;
-    
 
+
+
+    [SerializeField] private MonsterHPController hpController;
     [SerializeField] private KillCountSO killCountSO;
     protected List<Vector2> _path;
     protected int           _pathIndex;
@@ -139,10 +141,12 @@ public abstract class DefaultMonster : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
+        hpController.TakeDamage(damage);
         currentHealth -= damage;
         if (currentHealth <= 0)
             Die();
     }
+
     protected virtual IEnumerator DieRoutine()
     {
         PlayStateAnimation(MonsterState.Die, monsterDataSO.dieSprites, monsterDataSO.dieFrameDuration, loop: false);
