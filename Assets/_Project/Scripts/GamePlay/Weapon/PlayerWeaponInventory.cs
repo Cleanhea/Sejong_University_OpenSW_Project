@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,6 +24,11 @@ public class PlayerWeaponInventory : MonoBehaviour
     /// 해금된 무기 슬롯 목록을 읽기 전용으로 반환합니다.
     /// </summary>
     public IReadOnlyList<WeaponStat> WeaponSlots => weaponSlots;
+
+    /// <summary>
+    /// 무기 장착에 성공했을 때 장착된 슬롯 인덱스를 알립니다.
+    /// </summary>
+    public event Action<int> OnWeaponEquipped;
 
     void Awake()
     {
@@ -87,6 +93,7 @@ public class PlayerWeaponInventory : MonoBehaviour
 
         playerWeapon.SetWeapon(weaponStat);
         CurrentSlotIndex = slotIndex;
+        OnWeaponEquipped?.Invoke(slotIndex);
         return true;
     }
 
