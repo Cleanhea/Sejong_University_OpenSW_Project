@@ -11,23 +11,34 @@ public class Settings_UI : MonoBehaviour
     [Header("Audio Sliders")]
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider bgmSlider;
-    [SerializeField] private Slider sfxSlider;
 
     [Header("Audio Mixer")]
     [SerializeField] private AudioMixer audioMixer;
 
     private void Start()
     {
-        if (masterSlider != null) masterSlider.value = 1f;
-        if (bgmSlider != null) bgmSlider.value = 0.8f;
-        if (sfxSlider != null) sfxSlider.value = 0.8f;
+        if (masterSlider != null)
+        {
+            masterSlider.minValue = 0f;
+            masterSlider.maxValue = 1f;
+            masterSlider.value = 0.8f;
+        }
+        if (bgmSlider != null)
+        {
+            bgmSlider.minValue = 0f;
+            bgmSlider.maxValue = 1f;
+            bgmSlider.value = 0.8f;
+        }
+
+        if (masterSlider != null)
+            masterSlider.onValueChanged.AddListener(OnMasterVolumeChange);
+
+        if (bgmSlider != null)
+            bgmSlider.onValueChanged.AddListener(OnBGMVolumeChange);
 
         if(resolutionDropdown != null)
-        {
             resolutionDropdown.onValueChanged.AddListener(OnresolutionChange);
-        }
     }
-
 
     /// <summary>
     /// Changes the resolution of the game based on the dropdown selection.
@@ -72,18 +83,6 @@ public class Settings_UI : MonoBehaviour
         {
             float dB = value <= 0 ? -80f : Mathf.Log10(value) * 20f;
             audioMixer.SetFloat("BGMVolume", dB);
-        }
-    }
-
-    /// <summary>
-    /// Adjusts the SFX volume based on the slider value.
-    /// </summary>
-    public void OnSFXVolumeChange(float value)
-    {
-        Debug.Log($"SFX Volume set to {value}");
-        if (audioMixer != null)        {
-            float dB = value <= 0 ? -80f : Mathf.Log10(value) * 20f;
-            audioMixer.SetFloat("SFXVolume", dB);
         }
     }
 
