@@ -19,7 +19,9 @@ public abstract class DefaultMonster : MonoBehaviour
 
     [Header("Pathfinding")]
     [SerializeField] protected float pathRefreshInterval = 0.5f;
+    
 
+    [SerializeField] private KillCountSO killCountSO;
     protected List<Vector2> _path;
     protected int           _pathIndex;
     protected float         _pathTimer;
@@ -123,12 +125,15 @@ public abstract class DefaultMonster : MonoBehaviour
     // 각 몬스터 타입마다 공격 방식이 달라서 반드시 구현 필요
     public abstract void Attack();
 
+    [ContextMenu("Test Die")]
     public virtual void Die()
     {
+        if(State == MonsterState.Die) return;
         ChangeState(MonsterState.Die);
         isStateNotChangeable = true;
         if (_attackCoroutine != null)
             StopCoroutine(_attackCoroutine);
+        killCountSO.UpdateKillCount(1);
         StartCoroutine(DieRoutine());
     }
 
