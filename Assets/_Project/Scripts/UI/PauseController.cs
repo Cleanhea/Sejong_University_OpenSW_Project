@@ -13,7 +13,7 @@ public class PauseController : MonoBehaviour
     [SerializeField] private float blinkInterval = 1f;
 
     [Header("Scene Settings")]
-    [SerializeField] private string mainMenuSceneName = "MainMenu";
+    [SerializeField] private string mainMenuSceneName = "TitleScene";
 
     private bool isPaused = false;
     
