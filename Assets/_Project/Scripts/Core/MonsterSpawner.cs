@@ -10,6 +10,7 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Transform player;
     [SerializeField] private MonsterSpawnTableSO spawnTable;
+    [SerializeField] private PlayerStat playerStat;
 
     [Header("Spawn Range")]
     [SerializeField] private float minSpawnRadius = 7f;
@@ -17,7 +18,7 @@ public class MonsterSpawner : MonoBehaviour
 
     [Header("Spawn Settings")]
     [SerializeField] private float spawnInterval = 3f;
-    [SerializeField] private int spawnCountPerInterval = 1;
+    [SerializeField] private int spawnCountPerInterval = 2;
     [SerializeField] private int maxMonsterCount = 20;
     [SerializeField] private int maxSpawnAttempts = 10;
 
@@ -52,7 +53,11 @@ public class MonsterSpawner : MonoBehaviour
             var available = spawnTable.GetAvailableEntries((int)_elapsedTime);
             if (available.Count == 0) continue;
 
-            int toSpawn = Mathf.Min(spawnCountPerInterval, maxMonsterCount - _activeMonsters.Count);
+            // 플레이 시간 1분당 스폰량 2배 (1분 -> x2, 2분 -> x4, ...)
+            int elapsedMinutes = playerStat != null ? (int)playerStat.playTime.TotalMinutes : 0;
+            int spawnCount = spawnCountPerInterval * (int)Mathf.Pow(2, elapsedMinutes);
+
+            int toSpawn = Mathf.Min(Mathf.Max(spawnCount, spawnCountPerInterval), maxMonsterCount - _activeMonsters.Count);
             for (int i = 0; i < toSpawn; i++)
                 TrySpawnOne(available);
         }

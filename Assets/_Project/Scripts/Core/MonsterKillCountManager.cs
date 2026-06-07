@@ -22,6 +22,6 @@ public class MonsterKillCountManager : MonoBehaviour
 
     private void UpdateKillCountText(int newCount)
     {
-        killCountText.text = $"Kill Score: {newCount}";
+        killCountText.text = $"Score: {newCount}";
     }
 }

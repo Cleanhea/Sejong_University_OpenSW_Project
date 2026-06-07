@@ -1470,6 +1470,7 @@ MonoBehaviour:
   tilemap: {fileID: 561642738}
   player: {fileID: 1839783691}
   spawnTable: {fileID: 11400000, guid: e3d07a421fb56854fab7eeb10366ab37, type: 2}
+  playerStat: {fileID: 11400000, guid: c86b9bf25487ac64a941e40a34a26d95, type: 2}
   minSpawnRadius: 7
   maxSpawnRadius: 15
   spawnInterval: 3
@@ -1524,7 +1525,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 105, y: 1}
+  m_AnchoredPosition: {x: 215, y: 1}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &708729008
@@ -1560,7 +1561,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Kill Score : 0'
+  m_Text: 'Score : 0'
 --- !u!222 &708729009
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2103,7 +2104,7 @@ MonoBehaviour:
   padding: 1
   updateFitEveryFrame: 0
   detectAspectChange: 1
-  cameraSize: 10
+  cameraSize: 6.5
 --- !u!114 &1382840374
 MonoBehaviour:
   m_ObjectHideFlags: 0

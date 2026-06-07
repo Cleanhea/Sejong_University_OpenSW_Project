@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSpawnTableSO
   entries:
   - monsterPrefab: {fileID: 2693453145614418050, guid: ef12e85ca149fb745a9b5b664c6fa260, type: 3}
-    spawnWeight: 0.3
+    spawnWeight: 0.2
     unlockTime: 0
   - monsterPrefab: {fileID: 603810055372701174, guid: f939d01d3c4736948a6307f6101f8b1e, type: 3}
-    spawnWeight: 0.2
-    unlockTime: 2
+    spawnWeight: 0.3
+    unlockTime: 30
   - monsterPrefab: {fileID: 2693453145614418050, guid: 18836e19e73b3ba4aa111b7f8d07119d, type: 3}
-    spawnWeight: 0.2
-    unlockTime: 5
+    spawnWeight: 0.3
+    unlockTime: 60
   - monsterPrefab: {fileID: 9120270102802097277, guid: c1cb120130609f94abb4dd9d717423a2, type: 3}
     spawnWeight: 0.2
-    unlockTime: 10
+    unlockTime: 90
