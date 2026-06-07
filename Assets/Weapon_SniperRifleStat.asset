@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9773ea17df85164d98f106a2bb628d6, type: 3}
+  m_Name: Weapon_SniperRifleStat
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponStat
+  weaponKind: 1
+  displayName: "\uC2A4\uB098\uC774\uD37C \uB77C\uC774\uD50C"
+  inventoryIcon: {fileID: 21300000, guid: 554a6bc40557edc49ab82f1f4ceb5de6, type: 3}
+  equippedSprite: {fileID: 21300000, guid: 531b86b83cc46c94d9bbcef16069ed72, type: 3}
+  unlockedByDefault: 0
+  damage: 35
+  fireInterval: 0.9
+  projectileSpeed: 28
+  projectileLifetime: 2.3
+  aoeRadius: 2
+  maxChargeTime: 1.5
+  maxChargeMultiplier: 2

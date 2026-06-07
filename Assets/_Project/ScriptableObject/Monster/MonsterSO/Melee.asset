@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8c0a0ff0eaaec459028b4c02f4346b, type: 3}
+  m_Name: Melee
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterDataSO
+  maxHealth: 60
+  MoveSpeed: 5
+  AttackRange: 1.5
+  AttackDamage: 15
+  idleSprites:
+  - {fileID: 8208270978804853502, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 6136327500665522839, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 5970288980717055161, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 5890377819349913679, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 121273896049731177, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 3040354737816136184, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -7054007283797778286, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -8640008979126938862, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -1096644187029706322, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  idleFrameDuration: 0.2
+  moveSprites:
+  - {fileID: -7774492645288833583, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 2484293599936198623, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -3321144997716303366, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 4675431501783525172, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 4510458305350349954, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 6030794891275004595, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 4495131561068681048, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -4944259213985801239, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -1719056823131614644, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  moveFrameDuration: 0.2
+  attackSprites:
+  - {fileID: -2346025219232963105, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 5022712104352496132, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 7934606690589871543, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -944711850328714523, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -6251458974552418489, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -6166822697818452695, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 6174682997419202871, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 8073972626154892875, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 3651531483666161590, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  attackFrameDuration: 0.1
+  dieSprites:
+  - {fileID: 1245307847143418466, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -7566791216636447361, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -2273501865678690845, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -2900665441843717065, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -3303679309530484662, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: -1325610982, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 1174722358, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 991454503, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  - {fileID: 1352893233, guid: 4cf8217a5bfd7da48b6f6093a27cc78e, type: 3}
+  dieFrameDuration: 0.15
+  attackEffectPrefab: {fileID: 4423854640748271040, guid: 29104cf0f2da3394e928dc3d64214cfc, type: 3}
+  effectDuration: 0.7

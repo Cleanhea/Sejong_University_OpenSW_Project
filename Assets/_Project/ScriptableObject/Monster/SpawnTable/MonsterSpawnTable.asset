@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18521a202df15c49986f14a6c1b81b5, type: 3}
+  m_Name: MonsterSpawnTable
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterSpawnTableSO
+  entries:
+  - monsterPrefab: {fileID: 2693453145614418050, guid: ef12e85ca149fb745a9b5b664c6fa260, type: 3}
+    spawnWeight: 0.2
+    unlockTime: 0
+  - monsterPrefab: {fileID: 603810055372701174, guid: f939d01d3c4736948a6307f6101f8b1e, type: 3}
+    spawnWeight: 0.3
+    unlockTime: 30
+  - monsterPrefab: {fileID: 2693453145614418050, guid: 18836e19e73b3ba4aa111b7f8d07119d, type: 3}
+    spawnWeight: 0.3
+    unlockTime: 60
+  - monsterPrefab: {fileID: 9120270102802097277, guid: c1cb120130609f94abb4dd9d717423a2, type: 3}
+    spawnWeight: 0.2
+    unlockTime: 90

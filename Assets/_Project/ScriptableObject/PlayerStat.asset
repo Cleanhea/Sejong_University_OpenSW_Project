@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5d3780f79047146a690a13b8352064, type: 3}
+  m_Name: PlayerStat
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStat
+  maxHp: 100
+  currentHp: 100
+  defensePower: 5
+  speed: 5
+  maxDashCount: 3
+  currentDashCount: 3
+  dashCooldown: 2
+  dashCooldownTimer: 2
+  dashSpeed: 30
+  maxDashTime: 0.2
+  dashTimer: -0.0003888246
+  dashInvincible: 0
+  isInvincible: 0
+  invincibilityDuration: 0.4
+  invincibilityTimer: 0
+  knockbackForce: 20
+  knockbackDuration: 0.5
+  isKnockedBack: 1
+  playerdead: 0
+  killCountSO: {fileID: 11400000, guid: 0c3d6d76b9911cc448726adc60a4d171, type: 2}
