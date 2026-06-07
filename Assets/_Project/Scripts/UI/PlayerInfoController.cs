@@ -23,7 +23,19 @@ public class PlayerInfoController : MonoBehaviour
 
     [Header("Player Stat Data Connector ")]
     [SerializeField] private PlayerStat playerStat;
-    [SerializeField] private PlayerWeaponInventory playerWeaponInventory;
+    [SerializeField] private PlayerWeaponInventory playerWeaponInventory;  // 무기 인벤토리
+
+    private void OnEnable()
+    {
+        BindPlayerWeaponInventory();
+    }
+
+    private void OnDisable()
+    {
+        if (playerWeaponInventory == null) return;
+
+        playerWeaponInventory.OnWeaponEquipped -= ChangeActiveWeaponBorder;
+    }
 
     void Start()
     {
@@ -46,6 +58,7 @@ public class PlayerInfoController : MonoBehaviour
         }
 
         SyncWeaponSlotsWithInventory();
+        SyncActiveWeaponBorder();
     }
 
     void Update()
@@ -102,10 +115,10 @@ public class PlayerInfoController : MonoBehaviour
         }
     }
 
+    // 인벤토리에 등록된 무기 아이콘을 슬롯 UI에 반영합니다.
     private void SyncWeaponSlotsWithInventory()
     {
-        if (playerWeaponInventory == null)
-            playerWeaponInventory = FindObjectOfType<PlayerWeaponInventory>();
+        BindPlayerWeaponInventory();
 
         if (playerWeaponInventory == null) return;
 
@@ -116,5 +129,29 @@ public class PlayerInfoController : MonoBehaviour
 
             UnlockWeapon(i, weaponStat.inventoryIcon);
         }
+    }
+
+    // 현재 장착된 무기 슬롯의 테두리 상태를 맞춥니다.
+    private void SyncActiveWeaponBorder()
+    {
+        BindPlayerWeaponInventory();
+
+        int activeSlotIndex = 0;
+        if (playerWeaponInventory != null && playerWeaponInventory.CurrentSlotIndex >= 0)
+            activeSlotIndex = playerWeaponInventory.CurrentSlotIndex;
+
+        ChangeActiveWeaponBorder(activeSlotIndex);
+    }
+
+    // 무기 장착 이벤트를 UI 테두리 갱신에 연결합니다.
+    private void BindPlayerWeaponInventory()
+    {
+        if (playerWeaponInventory == null)
+            playerWeaponInventory = FindObjectOfType<PlayerWeaponInventory>();
+
+        if (playerWeaponInventory == null) return;
+
+        playerWeaponInventory.OnWeaponEquipped -= ChangeActiveWeaponBorder;
+        playerWeaponInventory.OnWeaponEquipped += ChangeActiveWeaponBorder;
     }
 }
