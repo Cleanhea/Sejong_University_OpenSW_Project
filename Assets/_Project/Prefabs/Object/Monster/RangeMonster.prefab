@@ -60,13 +60,17 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5910593239191318672, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
+      propertyPath: monster
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6460733650830315324, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
       propertyPath: m_Name
       value: RangeMonster
       objectReference: {fileID: 0}
     - target: {fileID: 7991119892731766188, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
       propertyPath: m_Radius
-      value: 9
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1564862706944930162, guid: 218db2e5761562c4c9e87f867d9fa927, type: 3}
