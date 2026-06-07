@@ -877,6 +877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 421741716}
   - component: {fileID: 421741715}
+  - component: {fileID: 421741717}
   m_Layer: 0
   m_Name: KillCountManager
   m_TagString: Untagged
@@ -898,6 +899,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterKillCountManager
   killCountSO: {fileID: 11400000, guid: 0c3d6d76b9911cc448726adc60a4d171, type: 2}
   killCountText: {fileID: 708729008}
+--- !u!114 &421741717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421741714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2f9b608ec844d4dbef54f17bb2f4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponUnlockManager
+  killCountSO: {fileID: 11400000, guid: 0c3d6d76b9911cc448726adc60a4d171, type: 2}
+  playerWeaponInventory: {fileID: 1839783685}
+  playerInfoController: {fileID: 0}
+  unlockRules:
+  - label: Sniper Rifle
+    requiredKillCount: 3
+    weaponStat: {fileID: 11400000, guid: fa189095d83714348ae3dc12a60660c3, type: 2}
+    unlocked: 0
+  - label: Submachine Gun
+    requiredKillCount: 6
+    weaponStat: {fileID: 11400000, guid: aed741c8c8bf4a94ab184a23b7205d6a, type: 2}
+    unlocked: 0
+  - label: Short Range AOE
+    requiredKillCount: 9
+    weaponStat: {fileID: 11400000, guid: b5276e2c9f1a4d249ae963af72cf4821, type: 2}
+    unlocked: 0
+  - label: Long Range AOE
+    requiredKillCount: 12
+    weaponStat: {fileID: 11400000, guid: c7e2f9d31a684c4e8427a37c5e1d9f10, type: 2}
+    unlocked: 0
 --- !u!4 &421741716
 Transform:
   m_ObjectHideFlags: 0
@@ -2310,10 +2343,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponInventory
   weaponSlots:
   - {fileID: 11400000, guid: 490ea5d8ccf0e3b4b96d7153856338c9, type: 2}
-  - {fileID: 11400000, guid: fa189095d83714348ae3dc12a60660c3, type: 2}
-  - {fileID: 11400000, guid: aed741c8c8bf4a94ab184a23b7205d6a, type: 2}
-  - {fileID: 11400000, guid: b5276e2c9f1a4d249ae963af72cf4821, type: 2}
-  - {fileID: 11400000, guid: c7e2f9d31a684c4e8427a37c5e1d9f10, type: 2}
   maxSlotCount: 5
   equipFirstWeaponOnAwake: 1
 --- !u!114 &1839783686
