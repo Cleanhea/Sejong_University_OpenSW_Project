@@ -24,6 +24,7 @@ public class MonsterHPController : MonoBehaviour
     void Start()
     {
         // 몬스터의 최대 체력(MonsterDataSO.maxHealth)에 맞춰 maxHP 설정
+        // monster 참조가 연결돼 있으면 그 값을 사용(아니면 인스펙터 maxHP 유지)
         if(monster != null)
         {
             maxHP = monster._maxHealth;
@@ -31,15 +32,29 @@ public class MonsterHPController : MonoBehaviour
 
         currentHP = maxHP;
 
+        if(fillImage != null)
+        {
+            fillImage.color = originalColor;
+        }
+
+        UpdateSlider();
+    }
+
+    // DefaultMonster가 자신의 최대 체력을 HP바로 직접 전달(push)할 때 사용.
+    // monster 참조가 비어 있어도, 실행 순서와 무관하게 maxHP를 올바르게 세팅한다.
+    public void SetMaxHP(float value)
+    {
+        maxHP = value;
+        currentHP = maxHP;
+        UpdateSlider();
+    }
+
+    private void UpdateSlider()
+    {
         if(hpSlider != null)
         {
             hpSlider.maxValue = maxHP;
             hpSlider.value = currentHP;
-        }
-
-        if(fillImage != null)
-        {
-            fillImage.color = originalColor;
         }
     }
 

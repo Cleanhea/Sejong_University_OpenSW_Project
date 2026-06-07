@@ -296,6 +296,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8876874262011652502, guid: 6beb947ebab2042cf8e2b280fe5d7800, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 3034709668251541589, guid: c7349f8f1e6764bd1afe508f3bc40331, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -604,6 +608,14 @@ PrefabInstance:
     - target: {fileID: 2862799387611578581, guid: 6a65cd1d5349d4f9e9bdf40b66b7354a, type: 3}
       propertyPath: m_Name
       value: UI_Main
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668471887657991385, guid: 6a65cd1d5349d4f9e9bdf40b66b7354a, type: 3}
+      propertyPath: m_text
+      value: Bug Hunter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668471887657991385, guid: 6a65cd1d5349d4f9e9bdf40b66b7354a, type: 3}
+      propertyPath: m_fontSize
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2445361071935631092, guid: 6a65cd1d5349d4f9e9bdf40b66b7354a, type: 3}

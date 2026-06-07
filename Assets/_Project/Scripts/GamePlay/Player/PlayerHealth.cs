@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
         playerStat.currentHp = playerStat.maxHp;
         playerStat.playerdead = false;
         playerStat.isInvincible = false;
+        playerStat.isKnockedBack = false;
         playerStat.invincibilityTimer = 0f;
     }
 

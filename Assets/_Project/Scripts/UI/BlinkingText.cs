@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
+[DefaultExecutionOrder(101)]
 public class BlinkingText : MonoBehaviour
 {
     [Header("UI Settings")]
@@ -22,6 +23,7 @@ public class BlinkingText : MonoBehaviour
         }
         if (targetText != null)
         {
+            Time.timeScale = 0f;
             StartCoroutine(BlinkText());
         }
     }
@@ -29,7 +31,6 @@ public class BlinkingText : MonoBehaviour
     void Update()
     {
         if (isStarted) return;
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             StartGame();
@@ -38,6 +39,7 @@ public class BlinkingText : MonoBehaviour
 
     private void StartGame()
     {
+        Time.timeScale = 1f;
         isStarted = true;
         StopAllCoroutines();
         targetText.alpha = 1f;
@@ -58,7 +60,7 @@ public class BlinkingText : MonoBehaviour
             float time = 0f;
             while (time < blinkInterval)
             {
-                time += Time.deltaTime;
+                time += Time.unscaledDeltaTime;
                 float percentage = time / blinkInterval;
                 targetText.alpha = Mathf.Lerp(1f, 0f, percentage);
                 yield return null;
@@ -68,8 +70,8 @@ public class BlinkingText : MonoBehaviour
             // Fade In
             time = 0f;
             while (time < blinkInterval)
-            {                
-                time += Time.deltaTime;
+            {
+                time += Time.unscaledDeltaTime;
                 float percentage = time / blinkInterval;
                 targetText.alpha = Mathf.Lerp(0f, 1f, percentage);
                 yield return null;
