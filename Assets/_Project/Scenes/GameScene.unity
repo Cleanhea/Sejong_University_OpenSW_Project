@@ -1474,7 +1474,7 @@ MonoBehaviour:
   minSpawnRadius: 7
   maxSpawnRadius: 15
   spawnInterval: 3
-  spawnCountPerInterval: 2
+  spawnCountPerInterval: 1
   maxMonsterCount: 20
   maxSpawnAttempts: 10
 --- !u!114 &619583124
@@ -2104,7 +2104,7 @@ MonoBehaviour:
   padding: 1
   updateFitEveryFrame: 0
   detectAspectChange: 1
-  cameraSize: 10
+  cameraSize: 6.5
 --- !u!114 &1382840374
 MonoBehaviour:
   m_ObjectHideFlags: 0
