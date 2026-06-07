@@ -21,6 +21,6 @@ MonoBehaviour:
   fireInterval: 0.8
   projectileSpeed: 0
   projectileLifetime: 0
-  aoeRadius: 2.2
+  aoeRadius: 4
   maxChargeTime: 1.2
   maxChargeMultiplier: 1.8
